@@ -1,0 +1,27 @@
+<div class="container" >
+      <div class="todo">
+        <h1>TODO-MOBILE</h1>
+         <div class="input-div">
+              <input [(ngModel)]="inputText" type="text">
+              <button style="background-color: black; color: white;" (click)="button()">click</button>
+         </div>
+         <div class="button">
+          <button 
+            [ngClass]="{'active': activeButton === 'all'}" 
+            (click)="setActiveButton('all')">all</button>
+          <button 
+            [ngClass]="{'active': activeButton === 'completed'}" 
+            (click)="setActiveButton('completed' )">completed</button>
+          <button 
+            [ngClass]="{'active': activeButton === 'delete'}" 
+            (click)="setActiveButton('delete')">delete</button>
+        </div>
+        <div *ngFor="let todo of todoTask let i = index " class="checkbox">
+         <input *ngIf="activeButton !== 'delete'"  (click)="chex(todo.id, todo.text)" type="checkbox"
+         [checked]="todo.completed"
+         (change)="onCheckboxChange(i, $event)"    >
+          <span>{{todo.text}}</span>
+          <button *ngIf="activeButton !== 'delete'"  (click)="delete(todo.id)" style="background-color: red; color: white;">Delete</button>
+        </div>
+      </div>
+</div>
